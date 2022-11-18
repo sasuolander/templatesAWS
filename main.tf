@@ -16,11 +16,11 @@ terraform {
 // Define basic variables, TODO place these another file or read them in command line!
 variable "awsprops" {
     default = {
-    region = "us-east-1"
+    region = "eu-west-1"
     ami = "ami-026b57f3c383c2eec"
     itype = "t2.micro"
-    publicip = true
-    keyname = "kari_aws"    // NOTE: precreated need to be changed!!
+    publicip = false
+    //keyname = "kari_aws"    // NOTE: precreated need to be changed!!
     secgroupname = "one-aws-sec-group"
   }
 }
@@ -65,8 +65,8 @@ resource "aws_security_group" "project-one-aws" {
 resource "aws_instance" "project-one-aws" {
   ami = lookup(var.awsprops, "ami")
   instance_type = lookup(var.awsprops, "itype")
-  associate_public_ip_address = lookup(var.awsprops, "publicip")
-  key_name = lookup(var.awsprops, "keyname")
+ // associate_public_ip_address = lookup(var.awsprops, "publicip")
+//  key_name = lookup(var.awsprops, "keyname")
 
   tags = {
     Name = "ExampleAppServerInstance"
